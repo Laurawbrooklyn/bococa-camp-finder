@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 
 const {DATABASE_URL, PORT} = require('./config');
-const {CampPost} = require('./models');
+const {Camp} = require('./models');
 
 const app = express();
 
@@ -15,11 +15,11 @@ app.use(express.static('public'));
 mongoose.Promise = global.Promise;
 
 
-app.get('/posts', (req, res) => {
-  CampPost
+app.get('/camps', (req, res) => {
+  Camp
     .find()
-    .then(posts => {
-      res.json(posts.map(post => post.apiRepr()));
+    .then(camps => {
+      res.json(camps.map(camp => camp.apiRepr()));
     })
     .catch(err => {
       console.error(err);
@@ -27,18 +27,18 @@ app.get('/posts', (req, res) => {
     });
 });
 
-app.get('/posts/:id', (req, res) => {
-  CampPost
+app.get('/camps/:id', (req, res) => {
+  Camp
     .findById(req.params.id)
-    .then(post => res.json(post.apiRepr()))
+    .then(camp => res.json(camp.apiRepr()))
     .catch(err => {
       console.error(err);
       res.status(500).json({error: 'something went horribly awry'});
     });
 });
 
-app.post('/posts', (req, res) => {
-  const requiredFields = ['camp', 'area', 'age', 'specialty'];
+app.post('/camps', (req, res) => {
+  const requiredFields = ['name', 'area', 'age', 'specialty'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -48,16 +48,16 @@ app.post('/posts', (req, res) => {
     }
   }
 
-  CampPost
+  Camp
     .create({
-      camp: req.body.name,
+      name: req.body.name,
       area: req.body.area,
       age: req.body.age,
       specialty: req.body.specialty,
       website: req.body.website,
       content: req.body.content,
     })
-    .then(campPost => res.status(201).json(campPost.apiRepr()))
+    .then(camp => res.status(201).json(camp.apiRepr()))
     .catch(err => {
         console.error(err);
         res.status(500).json({error: 'Something went wrong'});
@@ -66,8 +66,8 @@ app.post('/posts', (req, res) => {
 });
 
 
-app.delete('/posts/:id', (req, res) => {
-  CampPost
+app.delete('/camps/:id', (req, res) => {
+  Camp
     .findByIdAndRemove(req.params.id)
     .then(() => {
       res.status(204).json({message: 'success'});
@@ -79,7 +79,7 @@ app.delete('/posts/:id', (req, res) => {
 });
 
 
-app.put('/posts/:id', (req, res) => {
+app.put('/camps/:id', (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({
       error: 'Request path id and request body id values must match'
@@ -87,29 +87,28 @@ app.put('/posts/:id', (req, res) => {
   }
 
   const updated = {};
-  const updateableFields = ['camp', 'area', 'specialty', 'age', 'website', 'content'];
+  const updateableFields = ['name', 'area', 'specialty', 'age', 'website', 'content'];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
     }
   });
 
-  CampPost
+  Camp
     .findByIdAndUpdate(req.params.id, {$set: updated}, {new: true})
-    .then(updatedPost => res.status(204).end())
+    .then(updatedCamp => res.status(204).end())
     .catch(err => res.status(500).json({message: 'Something went wrong'}));
 });
 
 
 app.delete('/:id', (req, res) => {
-  CampPost
+  Camp
     .findByIdAndRemove(req.params.id)
     .then(() => {
-      console.log(`Deleted camp post with id \`${req.params.ID}\``);
+      console.log(`Deleted camp with id \`${req.params.ID}\``);
       res.status(204).end();
     });
 });
-
 
 app.use('*', function(req, res) {
   res.status(404).json({message: 'Not Found'});

@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 
-const campPostSchema = mongoose.Schema({
-  camp: {type: String, required: true},
+const campSchema = mongoose.Schema({
+  name: {type: String, required: true},
   area: {type: String, required: true},
-  age: {type: Number, required: true},
+  age: {type: String, required: true},
   specialty: {type: String, required: true},
-  website: {type: String}
+  website: {type: String},
   content: {type: String},
 });
 
-campPostSchema.methods.apiRepr = function() {
+campSchema.methods.apiRepr = function() {
   return {
     id: this._id,
-    camp: this.name,
+    name: this.name,
     area: this.area,
     age: this.age,
     specialty: this.specialty,
@@ -21,6 +21,6 @@ campPostSchema.methods.apiRepr = function() {
   };
 }
 
-const CampPost = mongoose.model('CampPost', campPostSchema);
+const Camp = mongoose.model('Camp', campSchema);
 
-module.exports = {CampPost};
+module.exports = {Camp};
