@@ -38,7 +38,7 @@ app.get('/camps/:id', (req, res) => {
 });
 
 app.post('/camps', (req, res) => {
-  const requiredFields = ['name', 'area', 'age', 'specialty'];
+  const requiredFields = ['name', 'area', 'age', 'price', 'specialty'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -53,6 +53,7 @@ app.post('/camps', (req, res) => {
       name: req.body.name,
       area: req.body.area,
       age: req.body.age,
+      price: req.body.price,
       specialty: req.body.specialty,
       website: req.body.website,
       content: req.body.content,
@@ -87,7 +88,7 @@ app.put('/camps/:id', (req, res) => {
   }
 
   const updated = {};
-  const updateableFields = ['name', 'area', 'specialty', 'age', 'website', 'content'];
+  const updateableFields = ['name', 'area', 'specialty', 'age', 'price', 'website', 'content'];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
