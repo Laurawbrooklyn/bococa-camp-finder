@@ -1,5 +1,5 @@
 $(function() {
-		$.ajax({
+	$.ajax({
 		url: `/camps`,
 		type: "GET",
 //		data: JSON.stringify(newCamp),
