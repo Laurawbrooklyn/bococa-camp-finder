@@ -20,8 +20,8 @@ campSchema.methods.apiRepr = function() {
     price: this.price,
     specialty: this.specialty,
     website: this.website,
-    picture: this picture,
     content: this.content,
+    picture: this picture,
   };
 }
 

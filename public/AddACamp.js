@@ -7,6 +7,7 @@
 				price: $("#select-price").val(),
 				specialty: $("#select-specialty").val(),
 				website: $("#website-input" ).val(),
+				picture: $("#picture-input").val(),
 				content: $("#about-input").val()
 			}
 			console.log(newCamp);
