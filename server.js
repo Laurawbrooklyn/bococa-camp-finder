@@ -56,6 +56,7 @@ app.post('/camps', (req, res) => {
       price: req.body.price,
       specialty: req.body.specialty,
       website: req.body.website,
+      picture: req.body.picture,
       content: req.body.content,
     })
     .then(camp => res.status(201).json(camp.apiRepr()))
@@ -88,7 +89,7 @@ app.put('/camps/:id', (req, res) => {
   }
 
   const updated = {};
-  const updateableFields = ['name', 'area', 'specialty', 'age', 'price', 'website', 'content'];
+  const updateableFields = ['name', 'area', 'specialty', 'age', 'price', 'website', 'picture', 'content'];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
