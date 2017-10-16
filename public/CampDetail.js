@@ -31,4 +31,5 @@ function renderCampDetail(camp){
 		`
 		$(".camp-detail").append(renderedCampDetail)
 		$("#camp-about").text(camp.content)
+		$("#camp-image").attr('src', camp.pictureUrl)
 }

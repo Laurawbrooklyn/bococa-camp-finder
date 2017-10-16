@@ -8,6 +8,7 @@ const campSchema = mongoose.Schema({
   specialty: {type: String, required: true},
   website: {type: String},
   content: {type: String},
+  pictureUrl: {type: String, default: "/pool.png"}
 });
 
 campSchema.methods.apiRepr = function() {
@@ -19,6 +20,7 @@ campSchema.methods.apiRepr = function() {
     price: this.price,
     specialty: this.specialty,
     website: this.website,
+    pictureUrl: this pictureUrl,
     content: this.content,
   };
 }
