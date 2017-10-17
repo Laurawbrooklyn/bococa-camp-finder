@@ -1,24 +1,55 @@
+//SHOW ALL CAMPS FUNCTION BELOW:
+
 $(function() {
-	$.ajax({
-		url: `/camps`,
-		type: "GET",
-//		data: JSON.stringify(newCamp),
-		contentType: "application/json; charset=utf-8",
-		dataType: "json",
-		success: function(data){
-			console.log("yay! data");
-			console.log(data);
-			renderCamps(data);
-		},
-		error: function(errorData){
-			console.log("err");
-			console.log(errorData);
-		},
+
+	$( "#search-with-filters-button" ).click(function() {
+		$("#filters").hide();
+
+		var searchParams = {
+			area: $( "#select-area" ).val(),
+		}
+		console.log(searchParams);
+
+		$.ajax({
+			url: `/camps`,
+			type: "GET",
+			//		data: JSON.stringify(newCamp),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(data){
+				console.log("yay! data");
+				console.log(data);
+				renderCamps(data);
+			},
+			error: function(errorData){
+				console.log("err");
+				console.log(errorData);
+			},
+		});
 	});
+
+	$( "#search-all-button" ).click(function() {
+		$("#filters").hide();
+
+		$.ajax({
+			url: `/camps`,
+			type: "GET",
+			//		data: JSON.stringify(newCamp),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(data){
+				renderCamps(data);
+			},
+			error: function(errorData){
+				console.log(errorData);
+			},
+		});
+	});
+
 });
 
 function renderCamps(campArray){
-	for (i = 0; i < campArray.length; i++) { 
+	for (i = 0; i < campArray.length; i++) {
 		let currentCamp = campArray[i];
 		let renderedCamp = `<div class="mt-3 col-sm-12 text-center camp-card mx-auto">
 		<h3><a href="/campdetail.html#${currentCamp.id}">${currentCamp.name}</a></h3>

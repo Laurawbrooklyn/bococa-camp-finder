@@ -1,4 +1,5 @@
-<html><head>
+<html>
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Bootstrap 4 ScrollSpy Nav</title>
@@ -30,6 +31,78 @@
       </ul>
     </div>
   </nav>
+
+
+
+
+
+
+  <div id="filters">
+    <div class="container bg-1">
+      <div class="mt-3">
+        <h3>View All Camps In the Camp Database:</h3>
+        <div class="text-center">
+          <button type="button" id="search-all-button" class="m-3 btn btn-primary">
+            <span class="btn btn-primary">Show All Camps Now!</span>
+          </button>
+        </div>
+      </div>
+      <hr>
+    </div>
+
+    <div class="container">
+      <h3>Or Filter Results By:</h3>
+      <div class="form-element">
+        <label for="select-area">Specific Area</label>
+        <select class="form-control" id="select-area">
+          <option>Boerum Hill</option>
+          <option>Cobble Hill</option>
+          <option>Carroll Gardens</option>
+          <option>Brooklyn Heights</option>
+          <option>Columbia Street Waterfront</option>
+          <option>All Areas</option>
+        </select>
+      </div>
+
+      <div class="form-element">
+        <label for="sel1">Age Range</label>
+        <select class="form-control" id="sel1">
+          <option>3 - 4 years old</option>
+          <option>5 years +</option>
+          <option>All Ages</option>
+        </select>
+      </div>
+
+      <div class="form-element">
+        <label for="sel1">Specialty</label>
+        <select class="form-control" id="sel1">
+          <option>Arts</option>
+          <option>Sports</option>
+          <option>STEM</option>
+          <option>Traditional</option>
+          <option>Other</option>
+          <option>All Camps</option>
+        </select>
+      </div>
+
+      <div class="form-element">
+        <label for="sel1">Price Per Week</label>
+        <select class="form-control" id="sel1">
+          <option>Under $500</option>
+          <option>Over $500</option>
+          <option>All Prices</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="container-fluid bg-1 text-center">
+      <div class="mt-3">
+        <button type="button" id="search-with-filters-button" class="btn btn-primary">
+          <a href="#" class="btn btn-primary">Search</a>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <div class="container bg-1">
     <div class="row camp-list">

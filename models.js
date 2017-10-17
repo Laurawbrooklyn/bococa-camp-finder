@@ -21,7 +21,7 @@ campSchema.methods.apiRepr = function() {
     specialty: this.specialty,
     website: this.website,
     content: this.content,
-    picture: this picture,
+    picture: this.picture,
   };
 }
 
