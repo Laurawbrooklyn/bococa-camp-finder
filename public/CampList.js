@@ -3,6 +3,7 @@
 $(function() {
 
 	$( "#search-with-filters-button" ).click(function() {
+		alert('hiding')
 		$("#filters").hide();
 
 		var searchParams = {
