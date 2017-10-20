@@ -13,13 +13,16 @@ $(function() {
 
 		var searchParams = {
 			area: $( "#select-area" ).val(),
+			age: $( "#select-age").val(),
+			specialty: $("#select-specialty").val(),
+			price: $("#select-price").val(),
 		}
 		console.log(searchParams);
 
 		$.ajax({
-			url: `/camps`,
-			type: "GET",
-			//		data: JSON.stringify(newCamp),
+			url: `/camps/filters`,
+			type: "POST",
+					data: JSON.stringify(searchParams),
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
 			success: function(data){

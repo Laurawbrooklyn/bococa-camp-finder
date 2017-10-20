@@ -27,6 +27,20 @@ app.get('/camps', (req, res) => {
     });
 });
 
+app.post('/camps/filters', (req, res) => {
+  console.log(req.body)
+  Camp
+    .find(req.body)
+    .then(camps => {
+      res.json(camps.map(camp => camp.apiRepr()));
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({error: 'something went terribly wrong'});
+    });
+});
+
+
 app.get('/camps/:id', (req, res) => {
   Camp
     .findById(req.params.id)
@@ -36,6 +50,7 @@ app.get('/camps/:id', (req, res) => {
       res.status(500).json({error: 'something went horribly awry'});
     });
 });
+
 
 app.post('/camps', (req, res) => {
   const requiredFields = ['name', 'area', 'age', 'price', 'specialty'];
