@@ -1,10 +1,15 @@
 //SHOW ALL CAMPS FUNCTION BELOW:
 
 $(function() {
-
-	$( "#search-with-filters-button" ).click(function() {
-		alert('hiding')
+	$("#show-filters").hide();
+	$("#show-filters-button").click(function() {
+		$("#filters").show();
+		$("#show-filters").hide();
+		$(".camp-list").text("");
+	});
+	$("#search-with-filters-button").click(function() {
 		$("#filters").hide();
+		$("#show-filters").show();
 
 		var searchParams = {
 			area: $( "#select-area" ).val(),
@@ -29,9 +34,9 @@ $(function() {
 		});
 	});
 
-	$( "#search-all-button" ).click(function() {
+	$("#search-all-button" ).click(function() {
 		$("#filters").hide();
-
+		$("#show-filters").show();
 		$.ajax({
 			url: `/camps`,
 			type: "GET",
@@ -53,10 +58,12 @@ function renderCamps(campArray){
 	for (i = 0; i < campArray.length; i++) {
 		let currentCamp = campArray[i];
 		let renderedCamp = `<div class="mt-3 col-sm-12 text-center camp-card mx-auto">
-		<h3><a href="/campdetail.html#${currentCamp.id}">${currentCamp.name}</a></h3>
+		<hr>
+		<h4><a href="/campdetail.html#${currentCamp.id}">${currentCamp.name}</a></h4>
 		<p>${currentCamp.area}</p>
 		<p>${currentCamp.age}</p>
 		<a href="${currentCamp.website}">${currentCamp.website}</a>
+		</hr>
 		</div>`
 		$(".camp-list").append(renderedCamp)
 	}
