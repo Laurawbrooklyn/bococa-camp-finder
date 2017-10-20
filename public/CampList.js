@@ -11,12 +11,25 @@ $(function() {
 		$("#filters").hide();
 		$("#show-filters").show();
 
-		var searchParams = {
-			area: $( "#select-area" ).val(),
-			age: $( "#select-age").val(),
-			specialty: $("#select-specialty").val(),
-			price: $("#select-price").val(),
-		}
+		var searchParams = {}
+
+			var area = $( "#select-area" ).val();
+			if (area !=="All Areas"){
+				searchParams.area=area
+			}
+			var age = $( "#select-age").val();
+			if (age !=="All Ages"){
+				searchParams.age=age
+			}
+			var specialty = $("#select-specialty").val();
+			if (specialty !=="All Camps"){
+				searchParams.specialty=specialty
+			}
+			var price = $("#select-price").val();
+			if (price !=="All Prices"){
+				searchParams.price=price
+			}
+
 		console.log(searchParams);
 
 		$.ajax({
