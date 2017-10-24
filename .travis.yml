@@ -1,0 +1,9 @@
+language: node_js
+node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: icBFeGRn/iPA7NeOEZCgyTsCEtLi2hCwaQ9JDDtSdJdqY0XVfjcN7G5DpVNComyI/PUelho462pRwG6HQ0mkyUfzpRMNAQrG8Lk7qM0T5lAApEhG1B+UeegMkQBSAG03xGXw76OE+jmatW9QBQv7WLLnsZIsfmiJR1iU286DNg8Z/rm//FBsTQvmsmzMG3rjuKIpy0GVZTS5NzzPbhrAdr67eltqH3v8ufnWkGdVxrZnF8TRrNsEYQca2mF+l07RMZQbOrUNWbG+Sl0mCjvXpgBYSqgvnOc8FQBvgi85x1zgZBM6abYzsnF5FQFTA0VBbVN/Fotg69i/VVjcdjqWwf6Q9tsMPNfn/xuQ/P0IcNIrWArCTeTb2nK0d7w0PzesGLrISA3+ca+CD2YgGIODOGv/UNQXuwpG8mtPaU9YrKSeF3SAYrLdeN7NtIgGN/NJKygZemuPmIpFF/OMKyOl/puzM6hWiKYPYg4rffj1EH+AkyQEvHLbOIv1I9ezOxNVelibwDt6bfRvU8NfCo2+OJGOGUIKptQCm8ig5s59itJT4kwcX2QmjeweSxpA8B7z2QzPZyr3KgVVOLjFEyv4iRliEi+f1NxmpPXh93hCwg5qtL0sre8nmcQ9qXS05tKwpUING+ElAakEMOCvq6T1bkVGhu/bL5xYVuKOCxpxjLQ=
+  app: aqueous-badlands-14233
+  on:
+    repo: Laurawbrooklyn/bococa-camp-finder
