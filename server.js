@@ -64,6 +64,20 @@ app.post('/camps', (req, res) => {
     }
   }
 
+//***not sure if this is correct, but trying to get the contact us form to post
+  app.post('/contact-us', (req, res) => {
+    const requiredFields = ['name', 'email', 'content'];
+    for (let i=0; i<requiredFields.length; i++) {
+      const field = requiredFields[i];
+      if (!(field in req.body)) {
+        const message = `Missing \`${field}\` in request body`
+        console.error(message);
+        return res.status(400).send(message);
+      }
+    }
+//***
+
+
   Camp
     .create({
       name: req.body.name,
