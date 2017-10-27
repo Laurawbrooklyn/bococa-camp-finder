@@ -75,7 +75,7 @@ function renderCamps(campArray){
 		let currentCamp = campArray[i];
 		let renderedCamp = `<div class="mt-3 col-sm-12 text-center camp-card mx-auto">
 		<hr>
-		<h4><a href="/campdetail.html#${currentCamp.id}">${currentCamp.name}</a></h4>
+		<h4><a href="/camp-detail.html#${currentCamp.id}">${currentCamp.name}</a></h4>
 		<p>${currentCamp.area}</p>
 		<p>${currentCamp.age}</p>
 		<a href="${currentCamp.website}">${currentCamp.website}</a>
