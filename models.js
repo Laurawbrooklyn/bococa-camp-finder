@@ -27,11 +27,6 @@ campSchema.methods.apiRepr = function() {
 
 const Camp = mongoose.model('Camp', campSchema);
 
-module.exports = {Camp};
-
-
-// const mongoose = require('mongoose');
-
 const contactSchema = mongoose.Schema({
   name: {type: String, required: true},
   email: {type: String, required: true},
@@ -50,4 +45,4 @@ contactSchema.methods.apiRepr = function() {
 
 const Contact = mongoose.model('Contact', contactSchema);
 
-module.exports = {Contact};
+module.exports = {Camp, Contact};

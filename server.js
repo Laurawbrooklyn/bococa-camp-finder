@@ -4,8 +4,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 
 const {DATABASE_URL, PORT} = require('./config');
-const {Camp} = require('./models');
-const {Contact} = require('./models');
+const {Camp, Contact} = require('./models');
 
 const app = express();
 
@@ -63,21 +62,9 @@ app.post('/camps', (req, res) => {
       return res.status(400).send(message);
     }
   }
-
-//***not sure if this is correct, but trying to get the contact us form to post
-  app.post('/contact-us', (req, res) => {
-    const requiredFields = ['name', 'email', 'content'];
-    for (let i=0; i<requiredFields.length; i++) {
-      const field = requiredFields[i];
-      if (!(field in req.body)) {
-        const message = `Missing \`${field}\` in request body`
-        console.error(message);
-        return res.status(400).send(message);
-      }
-    }
-//***
-
-
+ if (!req.body.picture) {
+   req.body.picture = "/pool.png"
+ }
   Camp
     .create({
       name: req.body.name,
@@ -140,6 +127,33 @@ app.delete('/:id', (req, res) => {
       console.log(`Deleted camp with id \`${req.params.ID}\``);
       res.status(204).end();
     });
+});
+
+
+app.post('/contact-us', (req, res) => {
+  const requiredFields = ['name', 'email', 'content'];
+  for (let i=0; i<requiredFields.length; i++) {
+    const field = requiredFields[i];
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\` in request body`
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  }
+
+  Contact
+    .create({
+      name: req.body.name,
+      email: req.body.email,
+      subject: req.body.subject,
+      content: req.body.content,
+    })
+    .then(contact => res.status(201).json(contact.apiRepr()))
+    .catch(err => {
+        console.error(err);
+        res.status(500).json({error: 'Something went wrong'});
+    });
+
 });
 
 app.use('*', function(req, res) {
