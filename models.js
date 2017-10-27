@@ -41,7 +41,6 @@ const contactSchema = mongoose.Schema({
 
 contactSchema.methods.apiRepr = function() {
   return {
-    id: this._id,
     name: this.name,
     email: this.email,
     subject: this.subject,
