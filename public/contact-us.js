@@ -1,20 +1,21 @@
 $(function() {
-  $( "#submit-contact-us" ).click(function() {
+  $( "#contact-us-form" ).submit(function(event) {
+    event.preventDefault()
     var newContact = {
       name: $( "#name" ).val(),
       email: $( "#email" ).val(),
       subject: $("#subject").val(),
-      message: $("#message").val(),
+      content: $("#message").val(),
     }
     console.log(newContact);
     $.ajax({
-      url: `/camps`,
+      url: `/contact-us`,
       type: "POST",
       data: JSON.stringify(newContact),
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: function(data){
-        console.log("yay! data");
+        $(".alert-success").removeClass("hidden")
         console.log(data);
       },
       error: function(errorData){
