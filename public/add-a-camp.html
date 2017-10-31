@@ -32,6 +32,7 @@
   </nav>
 
   <div class="container">
+    <form id="add-a-camp">
     <div class="form-group">
       <h3 class="my-3"><b>Add A Camp</b></h3>
       <label for="name-input">Camp Name</label>
@@ -97,13 +98,16 @@
     </div>
   </div>
 
+  <div class="alert alert-success hidden" role="alert">
+    Thank you for adding a camp to our Camp Database!
+  </div>
+
   <div class="container-fluid bg-1 text-center">
     <div class="mt-3">
-      <button type="button" id="add-a-camp" class="btn btn-default">
-        <a href="#" class="btn btn-default">Add A Camp</a>
-      </button>
+      <button type="submit" id="submit-add-a-camp" name="submit" class="mt-5 btn btn-primary pull-right">Add A Camp</button>
     </div>
   </div>
+</form>
 
   <footer class="container-fluid bg-4 text-center">
     <div class="container">
