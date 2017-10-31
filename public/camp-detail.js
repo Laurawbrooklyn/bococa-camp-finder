@@ -1,7 +1,7 @@
 $(function() {
 	let campId = window.location.hash.substr(1);
 	$.ajax({
-		url: `/camps/${campId}`,
+		url: `/api/camps/${campId}`,
 		type: "GET",
 //		data: JSON.stringify(newCamp),
 		contentType: "application/json; charset=utf-8",
@@ -20,7 +20,7 @@ $(function() {
 
 
 function renderCampDetail(camp){
-	
+
 	let renderedCampDetail = `<div class="mt-3 col-sm-12 camp-card mx-auto">
 	<h3>${camp.name}</h3>
 	<p><b>Area: </b>${camp.area}</p>

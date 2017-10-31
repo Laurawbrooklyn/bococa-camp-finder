@@ -7,23 +7,27 @@
     "start": "node server.js",
     "test": "mocha"
   },
-  "dependencies": {
-    "body-parser": "^1.15.2",
-    "express": "^4.12.4",
-    "mongoose": "^4.7.1",
-    "morgan": "^1.7.0",
-    "uuid": "^2.0.3"
-  },
   "keywords": [
     "node",
     "hyperdev",
     "express"
   ],
-  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.0",
+    "body-parser": "^1.15.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.14.0",
+    "jsonwebtoken": "^7.4.1",
+    "mongoose": "^4.7.4",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-http": "^0.3.0",
+    "passport-jwt": "^2.2.1"
+  },
   "devDependencies": {
-    "chai": "^4.1.2",
+    "chai": "^4.0.1",
     "chai-http": "^3.0.0",
-    "faker": "^4.1.0",
-    "mocha": "^3.5.3"
+    "faker": "^3.1.0",
+    "mocha": "^3.4.2"
   }
 }
