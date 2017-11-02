@@ -9,7 +9,7 @@ const {usersRouter} = require('./routers/users-router'); // REGISTER USER
 const {campsRouter} = require('./routers/camps-router');
 const {contactRouter} = require('./routers/contact-us-router');
 const {authRouter} = require('./routers/auth-router'); // Login + refresh
-const {basicStrategy, jwtStrategy} = require('./auth/strategies');
+const {localStrategy, jwtStrategy} = require('./auth/strategies');
 
 mongoose.Promise = global.Promise;
 
@@ -39,7 +39,7 @@ app.use(function(req, res, next) {
 });
 
 app.use(passport.initialize());
-passport.use(basicStrategy);
+passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 app.use('/api/users/', usersRouter);
