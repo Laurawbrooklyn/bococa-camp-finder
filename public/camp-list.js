@@ -33,7 +33,7 @@ $(function() {
 		console.log(searchParams);
 
 		$.ajax({
-			url: `/camps/filters`,
+			url: `/api/camps/filters`,
 			type: "POST",
 					data: JSON.stringify(searchParams),
 			contentType: "application/json; charset=utf-8",
@@ -54,7 +54,7 @@ $(function() {
 		$("#filters").hide();
 		$("#show-filters").show();
 		$.ajax({
-			url: `/camps`,
+			url: `/api/camps`,
 			type: "GET",
 			//		data: JSON.stringify(newCamp),
 			contentType: "application/json; charset=utf-8",

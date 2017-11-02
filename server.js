@@ -1,164 +1,78 @@
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const passport = require('passport');
 
-const {DATABASE_URL, PORT} = require('./config');
-const {Camp, Contact} = require('./models');
-
-const app = express();
-
-app.use(morgan('common'));
-app.use(bodyParser.json());
-app.use(express.static('public'));
+const {usersRouter} = require('./routers/users-router'); // REGISTER USER
+const {campsRouter} = require('./routers/camps-router');
+const {contactRouter} = require('./routers/contact-us-router');
+const {authRouter} = require('./routers/auth-router'); // Login + refresh
+const {basicStrategy, jwtStrategy} = require('./auth/strategies');
 
 mongoose.Promise = global.Promise;
 
+const {PORT, DATABASE_URL} = require('./config');
 
-app.get('/camps', (req, res) => {
-  Camp
-    .find()
-    .then(camps => {
-      res.json(camps.map(camp => camp.apiRepr()));
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({error: 'something went terribly wrong'});
-    });
-});
+const app = express();
 
-app.post('/camps/filters', (req, res) => {
-  console.log(req.body)
-  Camp
-    .find(req.body)
-    .then(camps => {
-      res.json(camps.map(camp => camp.apiRepr()));
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({error: 'something went terribly wrong'});
-    });
-});
+app.use(express.static('public'));
 
+app.use(bodyParser.urlencoded({ extended: false }))
 
-app.get('/camps/:id', (req, res) => {
-  Camp
-    .findById(req.params.id)
-    .then(camp => res.json(camp.apiRepr()))
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({error: 'something went horribly awry'});
-    });
-});
+// parse application/json
+app.use(bodyParser.json())
 
+// Logging
+app.use(morgan('common'));
 
-app.post('/camps', (req, res) => {
-  const requiredFields = ['name', 'area', 'age', 'price', 'specialty'];
-  for (let i=0; i<requiredFields.length; i++) {
-    const field = requiredFields[i];
-    if (!(field in req.body)) {
-      const message = `Missing \`${field}\` in request body`
-      console.error(message);
-      return res.status(400).send(message);
+// CORS
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+    if (req.method === 'OPTIONS') {
+        return res.send(204);
     }
-  }
- if (!req.body.picture) {
-   req.body.picture = "/pool.png"
- }
-  Camp
-    .create({
-      name: req.body.name,
-      area: req.body.area,
-      age: req.body.age,
-      price: req.body.price,
-      specialty: req.body.specialty,
-      website: req.body.website,
-      picture: req.body.picture,
-      content: req.body.content,
-    })
-    .then(camp => res.status(201).json(camp.apiRepr()))
-    .catch(err => {
-        console.error(err);
-        res.status(500).json({error: 'Something went wrong'});
-    });
-
+    next();
 });
 
+app.use(passport.initialize());
+passport.use(basicStrategy);
+passport.use(jwtStrategy);
 
-app.delete('/camps/:id', (req, res) => {
-  Camp
-    .findByIdAndRemove(req.params.id)
-    .then(() => {
-      res.status(204).json({message: 'success'});
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({error: 'something went terribly wrong'});
-    });
+app.use('/api/users/', usersRouter);
+app.use('/api/auth/', authRouter);
+app.use('/api/camps/', campsRouter);
+app.use('/api/contact-us/', contactRouter);
+
+// A protected endpoint which needs a valid JWT to access it
+// app.get(
+//     '/api/protected',
+//     passport.authenticate('jwt', {session: false}),
+//     (req, res) => {
+//         return res.json({
+//             data: 'rosebud'
+//         });
+//     }
+// );
+//
+// app.get(
+//     '/api/unprotected',
+//     (req, res) => {
+//         return res.json({
+//             data: 'rosebud'
+//         });
+//     }
+// );
+
+
+
+app.use('*', (req, res) => {
+    return res.status(404).json({message: 'Not Found'});
 });
 
-
-app.put('/camps/:id', (req, res) => {
-  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-    res.status(400).json({
-      error: 'Request path id and request body id values must match'
-    });
-  }
-
-  const updated = {};
-  const updateableFields = ['name', 'area', 'specialty', 'age', 'price', 'website', 'picture', 'content'];
-  updateableFields.forEach(field => {
-    if (field in req.body) {
-      updated[field] = req.body[field];
-    }
-  });
-
-  Camp
-    .findByIdAndUpdate(req.params.id, {$set: updated}, {new: true})
-    .then(updatedCamp => res.status(204).end())
-    .catch(err => res.status(500).json({message: 'Something went wrong'}));
-});
-
-
-app.delete('/:id', (req, res) => {
-  Camp
-    .findByIdAndRemove(req.params.id)
-    .then(() => {
-      console.log(`Deleted camp with id \`${req.params.ID}\``);
-      res.status(204).end();
-    });
-});
-
-
-app.post('/contact-us', (req, res) => {
-  const requiredFields = ['name', 'email', 'content'];
-  for (let i=0; i<requiredFields.length; i++) {
-    const field = requiredFields[i];
-    if (!(field in req.body)) {
-      const message = `Missing \`${field}\` in request body`
-      console.error(message);
-      return res.status(400).send(message);
-    }
-  }
-
-  Contact
-    .create({
-      name: req.body.name,
-      email: req.body.email,
-      subject: req.body.subject,
-      content: req.body.content,
-    })
-    .then(contact => res.status(201).json(contact.apiRepr()))
-    .catch(err => {
-        console.error(err);
-        res.status(500).json({error: 'Something went wrong'});
-    });
-
-});
-
-app.use('*', function(req, res) {
-  res.status(404).json({message: 'Not Found'});
-});
 
 // closeServer needs access to a server object, but that only
 // gets created when `runServer` runs, so we declare `server` here

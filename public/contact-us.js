@@ -9,7 +9,7 @@ $(function() {
     }
     console.log(newContact);
     $.ajax({
-      url: `/contact-us`,
+      url: `/api/contact-us`,
       type: "POST",
       data: JSON.stringify(newContact),
       contentType: "application/json; charset=utf-8",

@@ -16,7 +16,7 @@ $("#add-a-camp").submit(function(event) {
 			}
 			console.log(newCamp);
 			$.ajax({
-				url: `/camps`,
+				url: `/api/camps`,
 				type: "POST",
 				data: JSON.stringify(newCamp),
 				contentType: "application/json; charset=utf-8",
