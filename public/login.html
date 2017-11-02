@@ -37,28 +37,22 @@
 
     <div class="mt-5 card card-outline-secondary">
       <div class="card-header">
-        <h3 class="mb-0">Sign Up</h3>
+        <h3 class="mb-0">Login</h3>
       </div>
       <div class="card-block">
         <form class="form p-5" role="form" autocomplete="off">
-          <div class="form-group">
-            <label for="inputEmail3">Email</label>
-            <input type="email" class="form-control" id="inputEmail3" placeholder="Email must have 8 characters" required="">
-          </div>
+
           <div class="form-group">
             <label for="uname1">Username</label>
-            <input type="text" class="form-control" name="uname1" id="uname1" placeholder="Username must have at least 6 characters" required="">
+            <input type="text" class="form-control" name="uname1" id="username-input" placeholder="Username must have at least 6 characters" required="">
           </div>
           <div class="form-group">
             <label for="inputPassword3">Password</label>
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Password must have 8 characters" required="">
+            <input type="password" class="form-control" id="password-input" placeholder="Password must have 8 characters" required="">
           </div>
-          <div class="form-group">
-            <label for="inputVerify3">Verify</label>
-            <input type="password" class="form-control" id="inputVerify3" placeholder="Password (again)" required="">
-          </div>
+
           <div class="mt-5 form-group">
-            <button type="submit" class="btn btn-primary">Sign Up!</button>
+            <button id="login" class="btn btn-primary">Login!</button>
           </div>
         </form>
       </div>
@@ -86,6 +80,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<script src="/login.js"></script>
 
 </body>
 </html>
