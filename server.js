@@ -39,7 +39,7 @@ app.use(function(req, res, next) {
 });
 
 app.use(passport.initialize());
-passport.use(localStrategy);
+passport.use('local',localStrategy);
 passport.use(jwtStrategy);
 
 app.use('/api/users/', usersRouter);
