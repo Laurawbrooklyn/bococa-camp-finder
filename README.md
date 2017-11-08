@@ -12,6 +12,7 @@ The app was created based on conversations with several friends (with children) 
 
 ### Mobile Homepage:
 ![picture of mobile view homepage with campers making art in the woods](/homepage-mobile.png | width=100)
+<img src=“https://github.com/Laurawbrooklyn/bococa-camp-finder/raw/master/screenshot.png” width=“48">
 
 ### Filter Camps By Options:
 ![picture of option to view camps by various options](/filtercamps.png)
