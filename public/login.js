@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-$("#login").click(function(event) {
+$("#login-form").click(function(event) {
 	event.preventDefault();
 
 			var loginData = {

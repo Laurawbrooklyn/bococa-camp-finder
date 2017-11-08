@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-$("#sign-up").click(function(event) {
+$("#sign-up-form").click(function(event) {
 	event.preventDefault();
 
 			var newUser = {
