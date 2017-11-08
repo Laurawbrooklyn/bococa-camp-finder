@@ -8,7 +8,7 @@ The app was created based on conversations with several friends (with children) 
 
 ### Full Screen Homepage:
 
-![picture of homepage with campers making art in the woods](/homepage-large.png)
+![picture of homepage with campers making art in the woods](/screenshot.png)
 
 ### Mobile Homepage:
 ![picture of mobile view homepage with campers making art in the woods](/homepage-phone.png)
