@@ -1,7 +1,13 @@
 $(document).ready(function() {
+	var token = localStorage.getItem("token");
+	console.log(token)
+	if (!token) {
+		window.location.href = "/login.html";
+	}
 
 $("#add-a-camp").submit(function(event) {
 	event.preventDefault();
+
 	// $(function() {
 	// 	$( "#add-a-camp" ).click(function() {
 			var newCamp = {

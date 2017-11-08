@@ -15,9 +15,10 @@ $("#login").click(function(event) {
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function(data){
-					// $(".alert-success").removeClass("hidden")
-					console.log(data);
-          // window.location.href = "/login.html";
+					var token = data.authToken
+					localStorage.setItem('token', token);
+					console.log(token);
+          window.location.href = "/add-a-camp.html";
 				},
 				error: function(errorData){
 					console.log("err");
