@@ -11,7 +11,7 @@ The app was created based on conversations with several friends (with children) 
 ![picture of homepage with campers making art in the woods](/screenshot.png)
 
 ### Mobile Homepage:
-![picture of mobile view homepage with campers making art in the woods](/homepage-mobile.png =250x)
+![picture of mobile view homepage with campers making art in the woods](/homepage-mobile.png | width=100)
 
 ### Filter Camps By Options:
 ![picture of option to view camps by various options](/filtercamps.png)
