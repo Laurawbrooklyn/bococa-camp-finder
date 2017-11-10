@@ -1,4 +1,5 @@
 $(function() {
+
 	let campId = window.location.hash.substr(1);
 	$.ajax({
 		url: `/api/camps/${campId}`,
