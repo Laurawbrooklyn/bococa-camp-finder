@@ -1,7 +1,7 @@
 {
-  "name": "blog-app-mongoose-challenge-solution",
-  "version": "0.0.2",
-  "description": "blogging app'",
+  "name": "bococacampfinder",
+  "version": "0.0.1",
+  "description": "camp finder app for Bococa area of Brooklyn'",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
