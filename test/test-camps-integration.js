@@ -23,7 +23,7 @@ function seedCampData() {
       website: faker.internet.url(),
       content: faker.lorem.paragraph(),
       picture: faker.image.abstract(),
-      age: faker.random.number(2),
+      age: faker.random.arrayElement(['2 - 4 years old', '5 years+', 'All Ages']),
     });
   }
   return Camp.insertMany(seedData);
@@ -128,7 +128,7 @@ describe('camp API resource', function() {
       const newCamp = {
         name: faker.lorem.words(),
         area: faker.lorem.words(),
-        age: faker.random.number(2),
+        age: faker.random.arrayElement(['2 - 4 years old', '5 years+', 'All Ages']),
         price: faker.commerce.price(),
         specialty: faker.lorem.words(),
         website: faker.internet.url(),
@@ -188,12 +188,12 @@ describe('camp API resource', function() {
       };
       return Camp
         .findOne()
-        .then(function(post) {
-          updateData.id = post.id;
+        .then(function(camp) {
+          updateData.id = camp.id;
           // make request then inspect it to make sure it reflects
           // data we sent
           return chai.request(app)
-            .put(`/api/camps/${camp.id}`)
+            .put(`/api/camps/${updateData.id}`)
             .send(updateData);
         })
         .then(function(res) {
@@ -201,15 +201,15 @@ describe('camp API resource', function() {
 
           return Camp.findById(updateData.id);
         })
-        .then(function(post) {
-          post.name.should.equal(newCamp.name);
-          post.area.should.equal(newCamp.area);
-          post.age.should.equal(newCamp.age);
-          post.price.should.equal(newCamp.price);
-          post.specialty.should.equal(newCamp.specialty);
-          post.website.should.equal(newCamp.website);
-          post.content.should.equal(newCamp.content);
-          post.picture.should.equal(newCamp.picture);
+        .then(function(camp) {
+          camp.name.should.equal(updateData.name);
+          camp.area.should.equal(updateData.area);
+          camp.age.should.equal(updateData.age);
+          camp.price.should.equal(updateData.price);
+          camp.specialty.should.equal(updateData.specialty);
+          camp.website.should.equal(updateData.website);
+          camp.content.should.equal(updateData.content);
+          camp.picture.should.equal(updateData.picture);
         });
       });
   });
@@ -222,24 +222,24 @@ describe('camp API resource', function() {
     //  4. prove that the camp with the id doesn't exist in db anymore
     it('should delete a camp by id', function() {
 
-      let post;
+      let camp;
 
       return Camp
         .findOne()
-        .then(function(_post) {
-          post = _post;
-          return chai.request(app).delete(`/posts/${post.id}`);
+        .then(function(_camp) {
+          camp = _camp;
+          return chai.request(app).delete(`/api/camps/${camp.id}`);
         })
         .then(function(res) {
           res.should.have.status(204);
-          return BlogPost.findById(post.id);
+          return Camp.findById(camp.id);
         })
-        .then(function(_post) {
+        .then(function(_camp) {
           // when a variable's value is null, chaining `should`
           // doesn't work. so `_post.should.be.null` would raise
           // an error. `should.be.null(_post)` is how we can
           // make assertions about a null value.
-          should.not.exist(_post);
+          should.not.exist(_camp);
         });
     });
   });
