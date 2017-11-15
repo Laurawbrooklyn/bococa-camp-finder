@@ -19,7 +19,6 @@ function login(username, password) {
 		username,
 		password
 	}
-	console.log(loginData);
 	$.ajax({
 		url: `/api/auth/login`,
 		type: "POST",
