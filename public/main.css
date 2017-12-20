@@ -8,18 +8,22 @@
     padding-bottom: 15px;
     border: 0;
     border-radius: 0;
-    margin-bottom: 0;
-    font-size: 12px;
+    margin: 0 5px;
+    font-size: 13px;
     color: blue;
     letter-spacing: 2px;
+}
+
+.nav-link {
+      margin-left: 15px;
 }
 
 .navbar-nav li a:hover {
     color: #1abc9c !important;
 }
 
-.navbar-brand {
-  text-shadow: -1px -1px 0px rgba(255,255,255,0.3), 1px 1px 0px rgba(0,0,0,0.8);
+.logo {
+  height: 40px;
 }
 
 body {
