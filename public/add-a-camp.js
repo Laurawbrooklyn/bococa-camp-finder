@@ -8,8 +8,6 @@ $(document).ready(function() {
 $("#add-a-camp").submit(function(event) {
 	event.preventDefault();
 
-	// $(function() {
-	// 	$( "#add-a-camp" ).click(function() {
 			var newCamp = {
 				name: $( "#name-input" ).val(),
 				area: $( "#select-area" ).val(),
